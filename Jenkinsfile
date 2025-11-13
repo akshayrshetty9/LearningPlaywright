@@ -46,11 +46,12 @@ pipeline {
 
         stage('Publish Allure Report') {
             steps {
-                echo 'Publishing Allure report in Jenkins...'
-                allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
+                allure([
+                    reportBuildPolicy: 'ALWAYS',
+                    results: [[path: 'allure-results']]
+                       ])
             }
         }
-    }
 
     post {
         always {
@@ -59,3 +60,4 @@ pipeline {
         }
     }
 }
+
